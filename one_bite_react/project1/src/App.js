@@ -2,10 +2,9 @@ import './App.css';
 import { useRef, useEffect, useState } from 'react';
 import Viewer from './component/Viewer';
 import Controller from './component/Controller';
-<<<<<<< HEAD
+
 import Even from './component/Even';
-=======
->>>>>>> bb5157e77c5c97831a3b88e141931b1130266de4
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,7 +28,7 @@ function App() {
     }
   });
 
-<<<<<<< HEAD
+
   useEffect(() => {
     console.log("컴포넌트 마운트");
   }, []);
@@ -44,11 +43,11 @@ function App() {
       clearInterval(intervalID);
     };
   });
-=======
+
   // useEffect(() => {
   //   console.log("업데이트", count, text);
   // }, [count, text]);
->>>>>>> bb5157e77c5c97831a3b88e141931b1130266de4
+
 
 
   return (
@@ -59,10 +58,9 @@ function App() {
       </section>
       <section>
         <Viewer count={count}/>
-<<<<<<< HEAD
+
         {count % 2 === 0 && <Even />}
-=======
->>>>>>> bb5157e77c5c97831a3b88e141931b1130266de4
+
       </section>
       <section>
         <Controller handleSetCount={handleSetCount}/>
