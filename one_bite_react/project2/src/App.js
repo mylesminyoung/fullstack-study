@@ -2,7 +2,8 @@ import './App.css';
 import Header from './component/Header';
 import TodoEditor from './component/TodoEditor';
 import TodoList from './component/TodoList';
-import { useState, useRef } from 'react';
+import TestComp from './component/TestComp';
+import { useReducer, useRef } from 'react';
 
 const mockTodo = [
   {
@@ -25,27 +26,48 @@ const mockTodo = [
   },
 ];
 
+function reducer(state, action) {
+  // 상태 변화 코드
+  switch (action.type) {
+    case "CREATE": {
+      return [action.newItem, ...state];
+    }
+    default:
+      return state;
+  }
+}
+
 function App() {
+  const [todo, dispatch] = useReducer(reducer, mockTodo);
   const idRef = useRef(3);
 
-  const [todo, setTodo] = useState(mockTodo);
+  // const [todo, setTodo] = useState(mockTodo);
 
   const onCreate = (content) => {
-    const newItem = {
-      id: idRef.current,
-      content,
-      isDone: false,
-      createdDate: new Date().getTime(),
-    };
-    setTodo([newItem, ...todo]);
+    dispatch({
+      type: "CREATE",
+      newItem: {
+        id: idRef.current,
+        content,
+        isDone: false,
+        createdDate: new Date().getTime(),
+      },
+    });
+    // const newItem = {
+    //   id: idRef.current,
+    //   content,
+    //   isDone: false,
+    //   createdDate: new Date().getTime(),
+    // };
+    // setTodo([newItem, ...todo]);
     idRef.current += 1;
   };
 
   const onUpdate = (targetId) => {
-    setTodo(
-      todo.map(
-        (it) => 
-          it.id === targetId ? { ...it, isDone: !it.isDone } : it
+    // setTodo(
+    //   todo.map(
+    //     (it) => 
+    //       it.id === targetId ? { ...it, isDone: !it.isDone } : it
         
         // (it) => {
         //   if (it.id === targetId) {
@@ -57,12 +79,12 @@ function App() {
         //     return it;
         //   }
         // }
-      )
-    );
+    //   )
+    // );
   };
 
   const onDelete = (targetId) => {
-    setTodo(todo.filter((it) => it.id !== targetId));
+    // setTodo(todo.filter((it) => it.id !== targetId));
   }
 
   return (
