@@ -5,7 +5,7 @@ import "./TodoList.css";
 
 const TodoList = () => {
 // const TodoList = ({ todo, onUpdate, onDelete }) => {
-    const todo = useContext(TodoStateContext);
+    const { todo } = useContext(TodoStateContext);
     // console.log(storeData);
 
     const [search, setSearch] = useState("");
